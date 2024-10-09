@@ -57,7 +57,7 @@ class ZhipuAILLM(Self_LLM):
 
     client: Any
 
-    model: str = "chatglm_std"
+    model: str = "glm-4-flash"
     """Model name in chatglm_pro, chatglm_std, chatglm_lite. """
 
     zhipuai_api_key: Optional[str] = None
@@ -180,7 +180,7 @@ class ZhipuAILLM(Self_LLM):
 
         response = await self.client.async_invoke(**params)
 
-        return response_payload
+        return response
 
     def _stream(
         self,

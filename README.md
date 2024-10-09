@@ -84,7 +84,6 @@ pip install -r requirements.txt
 - 启动服务为本地 API
 ```shell
 # Linux 系统
-cd project/serve
 uvicorn api:app --reload 
 ```
 
@@ -96,7 +95,7 @@ python api.py
 - 运行项目
 ```shell
 cd llm-universe/project/serve
-python run_gradio.py -model_name='chatglm_std' -embedding_model='m3e' -db_path='../../data_base/knowledge_db' -persist_path='../../data_base/vector_db'
+python3 run_gradio.py -model_name='glm-4-flash' -embedding_model='zhipuai' -db_path='../knowledge_db' -persist_path='../vector_db'
 ```
 ### 2、开发流程简述
 

@@ -25,20 +25,20 @@ LLM_MODEL_DICT = {
     "openai": ["gpt-3.5-turbo", "gpt-3.5-turbo-16k-0613", "gpt-3.5-turbo-0613", "gpt-4", "gpt-4-32k"],
     "wenxin": ["ERNIE-Bot", "ERNIE-Bot-4", "ERNIE-Bot-turbo"],
     "xinhuo": ["Spark-1.5", "Spark-2.0"],
-    "zhipuai": ["chatglm_pro", "chatglm_std", "chatglm_lite"]
+    "zhipuai": ["glm-4","glm-4-flash"]
 }
 
 
 LLM_MODEL_LIST = sum(list(LLM_MODEL_DICT.values()),[])
-INIT_LLM = "chatglm_std"
+INIT_LLM = "glm-4-flash"
 EMBEDDING_MODEL_LIST = ['zhipuai', 'openai', 'm3e']
-INIT_EMBEDDING_MODEL = "m3e"
-DEFAULT_DB_PATH = "./knowledge_db"
-DEFAULT_PERSIST_PATH = "./vector_db/chroma"
-AIGC_AVATAR_PATH = "./figures/aigc_avatar.png"
-DATAWHALE_AVATAR_PATH = "./figures/datawhale_avatar.png"
-AIGC_LOGO_PATH = "./figures/aigc_logo.png"
-DATAWHALE_LOGO_PATH = "./figures/datawhale_logo.png"
+INIT_EMBEDDING_MODEL = "zhipuai"
+DEFAULT_DB_PATH = "../knowledge_db"
+DEFAULT_PERSIST_PATH = "../vector_db/chroma"
+AIGC_AVATAR_PATH = "../figures/aigc_avatar.png"
+DATAWHALE_AVATAR_PATH = "../figures/datawhale_avatar.png"
+AIGC_LOGO_PATH = "../figures/aigc_logo.png"
+DATAWHALE_LOGO_PATH = "../figures/datawhale_logo.png"
 
 def get_model_by_platform(platform):
     return LLM_MODEL_DICT.get(platform, "")

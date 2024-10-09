@@ -27,7 +27,7 @@ from datetime import datetime
 from time import mktime
 from urllib.parse import urlencode
 from wsgiref.handlers import format_date_time
-import zhipuai
+from zhipuai import ZhipuAI
 from langchain.utils import get_from_dict_or_env
 
 import websocket  # 使用websocket_client
@@ -133,15 +133,16 @@ def get_completion_glm(prompt : str, model : str, temperature : float, api_key:s
     # 获取GLM回答
     if api_key == None:
         api_key = parse_llm_api_key("zhipuai")
-    zhipuai.api_key = api_key
-
-    response = zhipuai.model_api.invoke(
+    
+    client = ZhipuAI(api_key=api_key)
+    
+    response = client.chat.completions.create(
         model=model,
-        prompt=[{"role":"user", "content":prompt}],
+        messages=[{"role":"user", "content":prompt}],
         temperature = temperature,
         max_tokens=max_tokens
         )
-    return response["data"]["choices"][0]["content"].strip('"').strip(" ")
+    return response.choices[0].message.content.strip('"').strip(" ")
 
 # def getText(role, content, text = []):
 #     # role 是指定角色，content 是 prompt 内容

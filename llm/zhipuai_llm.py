@@ -90,10 +90,8 @@ class ZhipuAILLM(Self_LLM):
             "model": values["model"],
         }
         try:
-            import zhipuai
-
-            zhipuai.api_key = values["zhipuai_api_key"]
-            values["client"] = zhipuai.model_api
+            from zhipuai import ZhipuAI
+            values["client"] = ZhipuAI(api_key=params["zhipuai_api_key"])
         except ImportError:
             raise ValueError(
                 "zhipuai package not found, please install it with "

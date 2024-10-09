@@ -32,7 +32,7 @@ template = """使用以下上下文来回答最后的问题。如果你不知道
 # 定义一个数据模型，用于接收POST请求中的数据
 class Item(BaseModel):
     prompt : str # 用户 prompt
-    model : str = "gpt-3.5-turbo"# 使用的模型
+    model : str = "glm-4-flash"# 使用的模型
     temperature : float = 0.1# 温度系数
     if_history : bool = False # 是否使用历史对话功能
     # API_Key
@@ -48,15 +48,15 @@ class Item(BaseModel):
     # Secret_key
     Wenxin_secret_key : str = None
     # 数据库路径
-    db_path : str = "/Users/lta/Desktop/llm-universe/data_base/vector_db/chroma"
+    db_path : str = "/data/workspace/Chat_with_Datawhale_langchain/vector_db/chroma"
     # 源文件路径
-    file_path : str = "/Users/lta/Desktop/llm-universe/data_base/knowledge_db"
+    file_path : str = "/data/workspace/Chat_with_Datawhale_langchain/knowledge_db"
     # prompt template
     prompt_template : str = template
     # Template 变量
     input_variables : list = ["context","question"]
     # Embdding
-    embedding : str = "m3e"
+    embedding : str = "zhipuai"
     # Top K
     top_k : int = 5
     # embedding_key

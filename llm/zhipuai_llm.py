@@ -31,6 +31,7 @@ from langchain.pydantic_v1 import Field, root_validator
 from langchain.schema.output import GenerationChunk
 from langchain.utils import get_from_dict_or_env
 from llm.self_llm import Self_LLM
+from zhipuai import ZhipuAI
 
 logger = logging.getLogger(__name__)
 
@@ -129,7 +130,7 @@ class ZhipuAILLM(Self_LLM):
         **kwargs: Any,
     ) -> dict:
         return {
-            **{"prompt": prompt, "model": self.model},
+            **{"message": prompt, "model": self.model},
             **self._default_params,
             **kwargs,
         }
@@ -151,6 +152,7 @@ class ZhipuAILLM(Self_LLM):
             .. code-block:: python
                 response = zhipuai_model("Tell me a joke.")
         """
+        self.client = ZhipuAI(api_key=self.zhipuai_api_key)
         if self.streaming:
             completion = ""
             for chunk in self._stream(prompt, stop, run_manager, **kwargs):
@@ -158,8 +160,8 @@ class ZhipuAILLM(Self_LLM):
             return completion
         params = self._convert_prompt_msg_params(prompt, **kwargs)
 
-        response_payload = self.client.invoke(**params)
-        return response_payload["data"]["choices"][-1]["content"].strip('"').strip(" ")
+        response_payload = self.client.chat.completions.create(**params)
+        return response_payload.choices[0].message.content.strip('"').strip(" ")
 
     async def _acall(
         self,
@@ -176,7 +178,7 @@ class ZhipuAILLM(Self_LLM):
 
         params = self._convert_prompt_msg_params(prompt, **kwargs)
 
-        response = await self.client.async_invoke(**params)
+        response = await self.client.chat.completions.create(**params)
 
         return response
 
@@ -189,7 +191,7 @@ class ZhipuAILLM(Self_LLM):
     ) -> Iterator[GenerationChunk]:
         params = self._convert_prompt_msg_params(prompt, **kwargs)
 
-        for res in self.client.invoke(**params):
+        for res in self.client.chat.completions.create(**params):
             if res:
                 chunk = GenerationChunk(text=res)
                 yield chunk

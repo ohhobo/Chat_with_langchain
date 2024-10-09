@@ -57,19 +57,14 @@ class ZhipuAIEmbeddings(BaseModel, Embeddings):
     def _embed(self, texts: str) -> List[float]:
         # send request
         try:
-            resp = self.client.invoke(
-                model="text_embedding",
-                prompt=texts
+            resp = self.client.embeddings.create(
+                model="embedding-2",
+                input=texts
             )
         except Exception as e:
             raise ValueError(f"Error raised by inference endpoint: {e}")
 
-        if resp["code"] != 200:
-            raise ValueError(
-                "Error raised by inference API HTTP code: %s, %s"
-                % (resp["code"], resp["msg"])
-            )
-        embeddings = resp["data"]["embedding"]
+        embeddings = resp.data[0].embedding
         return embeddings
 
     def embed_query(self, text: str) -> List[float]:

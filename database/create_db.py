@@ -1,3 +1,6 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import os
 import sys
 import re
@@ -12,8 +15,8 @@ from langchain.document_loaders import PyMuPDFLoader
 from langchain.vectorstores import Chroma
 # 首先实现基本配置
 
-DEFAULT_DB_PATH = "./knowledge_db"
-DEFAULT_PERSIST_PATH = "./vector_db"
+DEFAULT_DB_PATH = "../knowledge_db"
+DEFAULT_PERSIST_PATH = "../vector_db"
 
 
 def get_files(dir_path):
@@ -77,7 +80,7 @@ def create_db(files=DEFAULT_DB_PATH, persist_directory=DEFAULT_PERSIST_PATH, emb
     if type(embeddings) == str:
         embeddings = get_embedding(embedding=embeddings)
     # 定义持久化路径
-    persist_directory = './vector_db/chroma'
+    persist_directory = '../vector_db/chroma'
     # 加载数据库
     vectordb = Chroma.from_documents(
     documents=split_docs,
@@ -118,4 +121,4 @@ def load_knowledge_db(path, embeddings):
 
 
 if __name__ == "__main__":
-    create_db(embeddings="m3e")
+    create_db(embeddings="zhipuai")

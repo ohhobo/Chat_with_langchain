@@ -9,7 +9,9 @@
 @License :   (C)Copyright 2017-2018, Liugroup-NLPR-CASIA
 @Desc    :   启动服务为本地 API
 '''
-
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from fastapi import FastAPI
 from pydantic import BaseModel
 import os

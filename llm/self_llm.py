@@ -20,7 +20,7 @@ class Self_LLM(LLM):
     # 原生接口地址
     url : str =  None
     # 默认选用 GPT-3.5 模型，即目前一般所说的GPT
-    model_name: str = "glm-4-flash"
+    model: str = "glm-4-flash"
     # 访问时延上限
     request_timeout: float = None
     # 温度系数
@@ -44,4 +44,4 @@ class Self_LLM(LLM):
     @property
     def _identifying_params(self) -> Mapping[str, Any]:
         """Get the identifying parameters."""
-        return {**{"model_name": self.model_name}, **self._default_params}
+        return {**{"model": self.model}, **self._default_params}

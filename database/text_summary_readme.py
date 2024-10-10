@@ -7,6 +7,10 @@ import markdown
 import re
 import time
 # Load environment variables
+import sys
+import os                # 用于操作系统相关的操作，例如读取环境变量
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 # Set up the OpenAI API client
@@ -92,7 +96,7 @@ if __name__ == '__main__':
     # 配置组织名称
     org_name = 'datawhalechina'
     # 配置 export_dir
-    export_dir = "database/readme_db"  # 请替换为实际readme的目录路径
-    summary_dir="knowledge_db/readme_summary"# 请替换为实际readme的概括的目录路径
-    model="gpt-3.5-turbo"  #deepseek-chat,gpt-3.5-turbo,moonshot-v1-8k
+    export_dir = "./readme_db"  # 请替换为实际readme的目录路径
+    summary_dir="/data/workspace/Chat_with_Datawhale_langchain/knowledge_db/readme_summary"# 请替换为实际readme的概括的目录路径
+    model="glm-4-flash"  #deepseek-chat,gpt-3.5-turbo,moonshot-v1-8k
     main(org_name,export_dir,summary_dir,model)

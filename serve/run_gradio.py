@@ -156,7 +156,7 @@ with block as demo:
         gr.Image(value=AIGC_LOGO_PATH, scale=1, min_width=10, show_label=False, show_download_button=False, container=False)
    
         with gr.Column(scale=2):
-            gr.Markdown("""<h1><center>动手学大模型应用开发</center></h1>
+            gr.Markdown("""<h1><center>个人知识库助手</center></h1>
                 <center>LLM-UNIVERSE</center>
                 """)
         gr.Image(value=DATAWHALE_LOGO_PATH, scale=1, min_width=10, show_label=False, show_download_button=False, container=False)

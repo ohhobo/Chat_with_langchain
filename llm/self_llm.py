@@ -36,7 +36,6 @@ class Self_LLM(LLM):
         """获取调用默认参数。"""
         normal_params = {
             "temperature": self.temperature,
-            "request_timeout": self.request_timeout,
             }
         # print(type(self.model_kwargs))
         return {**normal_params}
